@@ -1,9 +1,38 @@
-import sys, os, json
+"""
+File: task-cli.py
+Name: Zhi-Xiu Lin
+-------------------------------
+This is a project used to track and manage user's tasks.
+In this task, you will build a simple command line interface (CLI) to track:
+1. what you need to do?
+2. what you have done?
+3. what you are currently working on?
+-------------------------------
+Note.
+- Please refer to README.md for the usage
+"""
+"""
+Add, Update, and Delete tasks
+Mark a task as in progress or done
+List all tasks
+List all tasks that are done
+List all tasks that are not done
+List all tasks that are in progress
+"""
+import json
+import os
+import sys
 
+# Define the file name of json file
 TASK_FILE = "tasks.json"
 
 
 def load_tasks():
+    """
+    Input: None
+    :return: python list (w/ or w/o dictionaries in the list)
+    """
+    # Check if the TASK_FILE exist
     if os.path.exists(TASK_FILE):
         with open(TASK_FILE, "r") as f:
             return json.load(f)
@@ -11,6 +40,11 @@ def load_tasks():
 
 
 def save_tasks(tasks):
+    """
+    some comment here
+    :param tasks:
+    :return:
+    """
     with open(TASK_FILE, "w") as f:
         json.dump(tasks, f, indent=2)
 
@@ -56,6 +90,9 @@ def complete_task(task_id):
 
 
 def main():
+    """
+    some comment here
+    """
     if len(sys.argv) < 3:
         print("Usage: task-cli.py [add|update|delete|complete] [args]")
         return
