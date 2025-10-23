@@ -2,15 +2,18 @@ import sys, os, json
 
 TASK_FILE = "tasks.json"
 
+
 def load_tasks():
     if os.path.exists(TASK_FILE):
         with open(TASK_FILE, "r") as f:
             return json.load(f)
     return []
 
+
 def save_tasks(tasks):
     with open(TASK_FILE, "w") as f:
         json.dump(tasks, f, indent=2)
+
 
 def add_task(content):
     tasks = load_tasks()
@@ -18,6 +21,7 @@ def add_task(content):
     tasks.append({"id": new_id, "content": content, "completed": False})
     save_tasks(tasks)
     print(f"Task added successfully (ID: {new_id})")
+
 
 def update_task(task_id, new_content):
     tasks = load_tasks()
@@ -29,6 +33,7 @@ def update_task(task_id, new_content):
             return
     print(f"Task {task_id} not found.")
 
+
 def delete_task(task_id):
     tasks = load_tasks()
     new_tasks = [task for task in tasks if task["id"] != task_id]
@@ -37,6 +42,7 @@ def delete_task(task_id):
     else:
         save_tasks(new_tasks)
         print(f"Task {task_id} deleted.")
+
 
 def complete_task(task_id):
     tasks = load_tasks()
@@ -47,6 +53,7 @@ def complete_task(task_id):
             print(f"Task {task_id} marked as completed.")
             return
     print(f"Task {task_id} not found.")
+
 
 def main():
     if len(sys.argv) < 3:
@@ -73,9 +80,9 @@ def main():
     else:
         print(f"Unknown command: {command}")
 
+
 if __name__ == "__main__":
     main()
-
 
 """
 Usage:
