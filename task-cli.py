@@ -83,5 +83,4 @@ python3 task-cli.py add "Buy groceries"
 python3 task-cli.py update 1 "Buy groceries and cook dinner"
 python3 task-cli.py complete 1
 python3 task-cli.py delete 1
-test
 """
