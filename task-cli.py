@@ -56,8 +56,8 @@ def add_task(content):
     :return: none
     """
     tasks = load_tasks()
-    new_id = tasks[-1]["id"] + 1 if tasks else 1
-    tasks.append({"id": new_id, "content": content, "completed": False})
+    new_id = tasks[-1]["Task Id"] + 1 if tasks else 1
+    tasks.append({"Task Id": new_id, "Content": content, "Status": "Not start yet"})
     save_tasks(tasks)
     print(f"Task added successfully (ID: {new_id})")
 
@@ -71,8 +71,8 @@ def update_task(task_id, new_content):
     """
     tasks = load_tasks()
     for task in tasks:
-        if task["id"] == task_id:
-            task["content"] = new_content
+        if task["Task Id"] == task_id:
+            task["Content"] = new_content
             save_tasks(tasks)
             print(f"Task (ID: {task_id}) updated.")
             return
@@ -81,35 +81,73 @@ def update_task(task_id, new_content):
 
 
 def delete_task(task_id):
+    """
+    Delete task which id is "task_id"
+    :param task_id: (int) the task id to be deleted
+    :return: none
+    """
     tasks = load_tasks()
-    new_tasks = [task for task in tasks if task["id"] != task_id]
-    if len(new_tasks) == len(tasks):
-        print(f"Task {task_id} not found.")
+    new_tasks = [task for task in tasks if task["Task Id"] != task_id]
+    if len(new_tasks) == len(tasks):  # Exception handling
+        print(f"Task (ID: {task_id}) not found.")
     else:
         save_tasks(new_tasks)
-        print(f"Task {task_id} deleted.")
-    # Updating and deleting tasks
-    # task-cli delete 1
+        print(f"Task (ID: {task_id}) deleted.")
 
 
-def complete_task(task_id):
+def mark_done(task_id):
+    """
+    Mark task status to "done"
+    :param task_id: (int) the task id to be marked done
+    :return: none
+    """
     tasks = load_tasks()
     for task in tasks:
-        if task["id"] == task_id:
-            task["completed"] = True
+        if task["Task Id"] == task_id:
+            task["Status"] = "Done"
             save_tasks(tasks)
-            print(f"Task {task_id} marked as completed.")
+            print(f"Task (ID: {task_id}) marked as Done.")
             return
-    print(f"Task {task_id} not found.")
+    print(f"Task (ID: {task_id}) not found.")
+
+
+def mark_in_progress(task_id):
+    """
+    Mark task status to "In progress"
+    :param task_id: (int) the task id to be marked in-progress
+    :return: none
+    """
+    tasks = load_tasks()
+    for task in tasks:
+        if task["Task Id"] == task_id:
+            task["Status"] = "In-Progress"
+            save_tasks(tasks)
+            print(f"Task (ID: {task_id}) marked as In-Progress.")
+            return
+    print(f"Task (ID: {task_id}) not found.")
+
+
+def list_tasks(status):
+    """
+    list all tasks in certain status (contain all tasks)
+    :param status: (str) tasks in which status to be listed.
+    :return: none
+    """
+    tasks = load_tasks()
+    if status == "all":
+        for task in tasks:
+            print(f"Task ID: {task['Task Id']}, Content: {task['Content']}, Status: {task['Status']}")
+    else:
+        pass
 
 
 def main():
     """
     some comment here
     """
-    if len(sys.argv) < 3:
-        print("Usage: task-cli.py [add|update|delete|complete] [args]")
-        return
+    # if len(sys.argv) < 3: # TODO
+    #     print("Usage: task-cli.py [add|update|delete|mark-in-progress|mark-done] [args]")
+    #     return
 
     command = sys.argv[1]
     if command == "add":
@@ -125,9 +163,20 @@ def main():
     elif command == "delete":
         task_id = int(sys.argv[2])
         delete_task(task_id)
-    elif command == "complete":
+    elif command == "mark-done":
         task_id = int(sys.argv[2])
-        complete_task(task_id)
+        mark_done(task_id)
+    elif command == "mark-in-progress":
+        task_id = int(sys.argv[2])
+        mark_in_progress(task_id)
+    elif command == "list":
+        if len(sys.argv) == 2:
+            list_tasks("all")
+        elif len(sys.argv) == 3:
+            task_id = int(sys.argv[1])
+            pass  # done, TO-DO, in-progress
+        else:
+            pass  # arg count error
     else:
         print(f"Unknown command: {command}")
 
@@ -136,17 +185,7 @@ if __name__ == "__main__":
     main()
 
 """
-Usage:
-python3 task-cli.py add "Buy groceries"
-python3 task-cli.py update 1 "Buy groceries and cook dinner"
-python3 task-cli.py complete 1
-python3 task-cli.py delete 1
-"""
-"""
-# Marking a task as in progress or done
-task-cli mark-in-progress 1
-task-cli mark-done 1
-
+Command to be completed:
 # Listing all tasks
 task-cli list
 
@@ -156,3 +195,5 @@ task-cli list todo
 task-cli list in-progress
 
 """
+# add exception handling to make sure arg count correct
+# complete list done,TO-DO, in-progress part
