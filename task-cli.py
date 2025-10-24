@@ -41,15 +41,20 @@ def load_tasks():
 
 def save_tasks(tasks):
     """
-    some comment here
-    :param tasks:
-    :return:
+    Save tasks data to json file
+    :param tasks: (list) consists of many dictionaries
+    :return: none
     """
     with open(TASK_FILE, "w") as f:
         json.dump(tasks, f, indent=2)
 
 
 def add_task(content):
+    """
+    Load current task data, add new task and give it an ID
+    :param content: (str) the content of new task
+    :return: none
+    """
     tasks = load_tasks()
     new_id = tasks[-1]["id"] + 1 if tasks else 1
     tasks.append({"id": new_id, "content": content, "completed": False})
@@ -58,14 +63,21 @@ def add_task(content):
 
 
 def update_task(task_id, new_content):
+    """
+    Updating task content
+    :param task_id: (int) the ID of task
+    :param new_content: (str) the content of the task
+    :return: none
+    """
     tasks = load_tasks()
     for task in tasks:
         if task["id"] == task_id:
             task["content"] = new_content
             save_tasks(tasks)
-            print(f"Task {task_id} updated.")
+            print(f"Task (ID: {task_id}) updated.")
             return
-    print(f"Task {task_id} not found.")
+    # Exception handling
+    print(f"Task (ID: {task_id}) not found.")
 
 
 def delete_task(task_id):
@@ -76,6 +88,8 @@ def delete_task(task_id):
     else:
         save_tasks(new_tasks)
         print(f"Task {task_id} deleted.")
+    # Updating and deleting tasks
+    # task-cli delete 1
 
 
 def complete_task(task_id):
@@ -127,4 +141,18 @@ python3 task-cli.py add "Buy groceries"
 python3 task-cli.py update 1 "Buy groceries and cook dinner"
 python3 task-cli.py complete 1
 python3 task-cli.py delete 1
+"""
+"""
+# Marking a task as in progress or done
+task-cli mark-in-progress 1
+task-cli mark-done 1
+
+# Listing all tasks
+task-cli list
+
+# Listing tasks by status
+task-cli list done
+task-cli list todo
+task-cli list in-progress
+
 """
