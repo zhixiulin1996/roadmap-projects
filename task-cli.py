@@ -57,7 +57,7 @@ def add_task(content):
     """
     tasks = load_tasks()
     new_id = tasks[-1]["Task Id"] + 1 if tasks else 1
-    tasks.append({"Task Id": new_id, "Content": content, "Status": "Not start yet"})
+    tasks.append({"Task Id": new_id, "Content": content, "Status": "todo"})
     save_tasks(tasks)
     print(f"Task added successfully (ID: {new_id})")
 
@@ -104,9 +104,9 @@ def mark_done(task_id):
     tasks = load_tasks()
     for task in tasks:
         if task["Task Id"] == task_id:
-            task["Status"] = "Done"
+            task["Status"] = "done"
             save_tasks(tasks)
-            print(f"Task (ID: {task_id}) marked as Done.")
+            print(f"Task (ID: {task_id}) marked as done.")
             return
     print(f"Task (ID: {task_id}) not found.")
 
@@ -120,9 +120,9 @@ def mark_in_progress(task_id):
     tasks = load_tasks()
     for task in tasks:
         if task["Task Id"] == task_id:
-            task["Status"] = "In-Progress"
+            task["Status"] = "in-progress"
             save_tasks(tasks)
-            print(f"Task (ID: {task_id}) marked as In-Progress.")
+            print(f"Task (ID: {task_id}) marked as in-progress.")
             return
     print(f"Task (ID: {task_id}) not found.")
 
@@ -137,8 +137,10 @@ def list_tasks(status):
     if status == "all":
         for task in tasks:
             print(f"Task ID: {task['Task Id']}, Content: {task['Content']}, Status: {task['Status']}")
-    else:
-        pass
+    else:  # list certain status tasks
+        for task in tasks:
+            if task['Status'] == status:
+                print(f"Task ID: {task['Task Id']}, Content: {task['Content']}, Status: {task['Status']}")
 
 
 def main():
@@ -173,10 +175,9 @@ def main():
         if len(sys.argv) == 2:
             list_tasks("all")
         elif len(sys.argv) == 3:
-            task_id = int(sys.argv[1])
-            pass  # done, TO-DO, in-progress
+            list_tasks(str(sys.argv[2]))
         else:
-            pass  # arg count error
+            print(f"Argument Count Error (Command: {command})")  # list command arg count error
     else:
         print(f"Unknown command: {command}")
 
@@ -184,16 +185,4 @@ def main():
 if __name__ == "__main__":
     main()
 
-"""
-Command to be completed:
-# Listing all tasks
-task-cli list
-
-# Listing tasks by status
-task-cli list done
-task-cli list todo
-task-cli list in-progress
-
-"""
 # add exception handling to make sure arg count correct
-# complete list done,TO-DO, in-progress part
