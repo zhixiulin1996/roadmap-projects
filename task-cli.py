@@ -147,7 +147,7 @@ def list_tasks(status):
             if task['status'] == status:
                 print(
                     f"Task ID: {task['id']}, Description: {task['description']}, Status: {task['status']}, Create DateTime: {task['createdAt']}, Update DateTime: {task['updatedAt']}")
-            found = True
+                found = True
         if not found:
             print(f'There is no task in "{status}" status.')
     else:
