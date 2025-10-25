@@ -1,6 +1,7 @@
 # Task-Tracker-CLI
 ## Basic Intorduction
 Task tracker is a project used to track and manage your tasks. In this task, you will build a simple command line interface (CLI) to track what you need to do, what you have done, and what you are currently working on.
+(This project is the idea of roadmap.sh (URL: https://roadmap.sh/projects/task-tracker))
 ## Functions
 The application will run from the command line and store your tasks in a JSON file. Functions are listed as below:
 
