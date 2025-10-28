@@ -1,0 +1,380 @@
+[
+  {
+    "id": "5323795204",
+    "type": "PushEvent",
+    "actor": {
+      "id": 4921183,
+      "login": "kamranahmedse",
+      "display_login": "kamranahmedse",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/kamranahmedse",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4921183?"
+    },
+    "repo": {
+      "id": 85077558,
+      "name": "kamranahmedse/developer-roadmap",
+      "url": "https://api.github.com/repos/kamranahmedse/developer-roadmap"
+    },
+    "payload": {
+      "repository_id": 85077558,
+      "push_id": 27613467210,
+      "ref": "refs/heads/master",
+      "head": "13ef195ca636d60d53369ec3acb86d24041758a3",
+      "before": "3def0434f9ef4110bbe796e3b3a567a2d9b82455"
+    },
+    "public": true,
+    "created_at": "2025-10-20T06:32:45Z"
+  },
+  {
+    "id": "5323776945",
+    "type": "DeleteEvent",
+    "actor": {
+      "id": 4921183,
+      "login": "kamranahmedse",
+      "display_login": "kamranahmedse",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/kamranahmedse",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4921183?"
+    },
+    "repo": {
+      "id": 85077558,
+      "name": "kamranahmedse/developer-roadmap",
+      "url": "https://api.github.com/repos/kamranahmedse/developer-roadmap"
+    },
+    "payload": {
+      "ref": "chore/update-content-json",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/chore/update-content-json",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2025-10-20T06:31:40Z"
+  },
+  {
+    "id": "4130500040",
+    "type": "IssuesEvent",
+    "actor": {
+      "id": 4921183,
+      "login": "kamranahmedse",
+      "display_login": "kamranahmedse",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/kamranahmedse",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4921183?"
+    },
+    "repo": {
+      "id": 85077558,
+      "name": "kamranahmedse/developer-roadmap",
+      "url": "https://api.github.com/repos/kamranahmedse/developer-roadmap"
+    },
+    "payload": {
+      "action": "closed",
+      "issue": {
+        "url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/issues/9266",
+        "repository_url": "https://api.github.com/repos/kamranahmedse/developer-roadmap",
+        "labels_url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/issues/9266/labels{/name}",
+        "comments_url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/issues/9266/comments",
+        "events_url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/issues/9266/events",
+        "html_url": "https://github.com/kamranahmedse/developer-roadmap/issues/9266",
+        "id": 3528681930,
+        "node_id": "I_kwDOBRIuNs7SU2nK",
+        "number": 9266,
+        "title": "Rename “Pyre” node to “Pyrefly” (next iteration of Pyre)",
+        "user": {
+          "login": "mazdakdev",
+          "id": 60855141,
+          "node_id": "MDQ6VXNlcjYwODU1MTQx",
+          "avatar_url": "https://avatars.githubusercontent.com/u/60855141?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/mazdakdev",
+          "html_url": "https://github.com/mazdakdev",
+          "followers_url": "https://api.github.com/users/mazdakdev/followers",
+          "following_url": "https://api.github.com/users/mazdakdev/following{/other_user}",
+          "gists_url": "https://api.github.com/users/mazdakdev/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/mazdakdev/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/mazdakdev/subscriptions",
+          "organizations_url": "https://api.github.com/users/mazdakdev/orgs",
+          "repos_url": "https://api.github.com/users/mazdakdev/repos",
+          "events_url": "https://api.github.com/users/mazdakdev/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/mazdakdev/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "labels": [
+          {
+            "id": 6934955806,
+            "node_id": "LA_kwDOBRIuNs8AAAABnVsHHg",
+            "url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/labels/topic-change",
+            "name": "topic-change",
+            "color": "5454FC",
+            "default": false,
+            "description": "Missing or deprecated topics in roadmap"
+          },
+          {
+            "id": 6934973020,
+            "node_id": "LA_kwDOBRIuNs8AAAABnVtKXA",
+            "url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/labels/python",
+            "name": "python",
+            "color": "34aa40",
+            "default": false,
+            "description": "Roadmap: python"
+          }
+        ],
+        "state": "closed",
+        "locked": false,
+        "assignee": null,
+        "assignees": [],
+        "milestone": null,
+        "comments": 0,
+        "created_at": "2025-10-18T11:27:39Z",
+        "updated_at": "2025-10-20T06:24:10Z",
+        "closed_at": "2025-10-20T06:24:10Z",
+        "active_lock_reason": null,
+        "sub_issues_summary": {
+          "total": 0,
+          "completed": 0,
+          "percent_completed": 0
+        },
+        "issue_dependencies_summary": {
+          "blocked_by": 0,
+          "total_blocked_by": 0,
+          "blocking": 0,
+          "total_blocking": 0
+        },
+        "body": "### Roadmap URL\n\nhttps://roadmap.sh/python\n\n### Suggestions\n\nFollowing up on PR #9265 and the [pyre-check.org](https://pyre-check.org/), it seems more appropriate to rename the node’s title to “Pyrefly” for better consistency. \n\n",
+        "reactions": {
+          "url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/issues/9266/reactions",
+          "total_count": 0,
+          "+1": 0,
+          "-1": 0,
+          "laugh": 0,
+          "hooray": 0,
+          "confused": 0,
+          "heart": 0,
+          "rocket": 0,
+          "eyes": 0
+        },
+        "timeline_url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/issues/9266/timeline",
+        "performed_via_github_app": null,
+        "state_reason": "completed"
+      }
+    },
+    "public": true,
+    "created_at": "2025-10-20T06:24:11Z"
+  },
+  {
+    "id": "4130494735",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 4921183,
+      "login": "kamranahmedse",
+      "display_login": "kamranahmedse",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/kamranahmedse",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4921183?"
+    },
+    "repo": {
+      "id": 85077558,
+      "name": "kamranahmedse/developer-roadmap",
+      "url": "https://api.github.com/repos/kamranahmedse/developer-roadmap"
+    },
+    "payload": {
+      "action": "closed",
+      "number": 9267,
+      "pull_request": {
+        "url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/pulls/9267",
+        "id": 2926918104,
+        "number": 9267,
+        "head": {
+          "ref": "master",
+          "sha": "10a6e3ced3d0cf39b802881f637d43b20264124c",
+          "repo": {
+            "id": 1078892165,
+            "url": "https://api.github.com/repos/lucasrp-star/developer-roadmap",
+            "name": "developer-roadmap"
+          }
+        },
+        "base": {
+          "ref": "master",
+          "sha": "bb09fbd322a3b042479b40a56a90d032f3970106",
+          "repo": {
+            "id": 85077558,
+            "url": "https://api.github.com/repos/kamranahmedse/developer-roadmap",
+            "name": "developer-roadmap"
+          }
+        }
+      }
+    },
+    "public": true,
+    "created_at": "2025-10-18T16:44:01Z"
+  },
+  {
+    "id": "4002728728",
+    "type": "IssueCommentEvent",
+    "actor": {
+      "id": 4921183,
+      "login": "kamranahmedse",
+      "display_login": "kamranahmedse",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/kamranahmedse",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4921183?"
+    },
+    "repo": {
+      "id": 85077558,
+      "name": "kamranahmedse/developer-roadmap",
+      "url": "https://api.github.com/repos/kamranahmedse/developer-roadmap"
+    },
+    "payload": {
+      "action": "created",
+      "issue": {
+        "url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/issues/9227",
+        "repository_url": "https://api.github.com/repos/kamranahmedse/developer-roadmap",
+        "labels_url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/issues/9227/labels{/name}",
+        "comments_url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/issues/9227/comments",
+        "events_url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/issues/9227/events",
+        "html_url": "https://github.com/kamranahmedse/developer-roadmap/issues/9227",
+        "id": 3490607492,
+        "node_id": "I_kwDOBRIuNs7QDnGE",
+        "number": 9227,
+        "title": "Support \"?category=\" filter on \"/guides\" (e.g. \"/guides?category=textual\")",
+        "user": {
+          "login": "beydah",
+          "id": 116380099,
+          "node_id": "U_kgDOBu_Rww",
+          "avatar_url": "https://avatars.githubusercontent.com/u/116380099?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/beydah",
+          "html_url": "https://github.com/beydah",
+          "followers_url": "https://api.github.com/users/beydah/followers",
+          "following_url": "https://api.github.com/users/beydah/following{/other_user}",
+          "gists_url": "https://api.github.com/users/beydah/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/beydah/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/beydah/subscriptions",
+          "organizations_url": "https://api.github.com/users/beydah/orgs",
+          "repos_url": "https://api.github.com/users/beydah/repos",
+          "events_url": "https://api.github.com/users/beydah/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/beydah/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "labels": [
+          {
+            "id": 5069765299,
+            "node_id": "LA_kwDOBRIuNs8AAAABLi56sw",
+            "url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/labels/feature%20request",
+            "name": "feature request",
+            "color": "D649A4",
+            "default": false,
+            "description": "Indicates new feature requests"
+          }
+        ],
+        "state": "closed",
+        "locked": false,
+        "assignee": null,
+        "assignees": [],
+        "milestone": null,
+        "comments": 1,
+        "created_at": "2025-10-07T09:04:26Z",
+        "updated_at": "2025-10-13T10:30:20Z",
+        "closed_at": "2025-10-13T10:30:20Z",
+        "active_lock_reason": null,
+        "sub_issues_summary": {
+          "total": 0,
+          "completed": 0,
+          "percent_completed": 0
+        },
+        "issue_dependencies_summary": {
+          "blocked_by": 0,
+          "total_blocked_by": 0,
+          "blocking": 0,
+          "total_blocking": 0
+        },
+        "body": "### Feature Description\n\n## 1. Feature Request\n\nI’d like to request that the **Guides** page (`/guides`) support filtering by category through a query parameter.\nFor example:\n\n* `https://roadmap.sh/guides?category=textual`\n* `https://roadmap.sh/guides?category=question`\n\nWhen a `category` query parameter is provided, only those guides matching the category should be shown.\nIf no parameter is given, all guides are shown (current behavior).\n\nThis will help users bookmark or share category‑filtered views and improve discoverability.\n\n\n<img width=\"948\" height=\"526\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/056a542e-a167-4397-b850-909f77a5edac\" />\n\n---\n\n## 2. Relevant Code Files / Locations\n\nBelow are candidate files or folders in the repo that are likely relevant and should be updated. (You may need to adjust paths depending on actual file structure.)\n\n* `src/pages/guides.astro` (or similar route file for `/guides`)\n* `src/components/GuideList.astro` or `src/components/Guides/GuideList.astro`\n* `src/components/GuideCard.astro`\n* `src/data/guides/*.md` (or wherever guide metadata / frontmatter is stored)\n* `src/lib/guides.ts` (or `queries/guides.ts`) — utility or data loading logic\n\nThese are examples you can inspect in the repo structure and adapt.\n\n---\n\n## 3. Example Implementation Snippet\n\nHere’s an illustrative sketch (Astro / JavaScript) of how you might implement query filtering client‑side or at render time:\n\n```ts\n---\n// In `src/pages/guides.astro`\nimport { getAllGuides } from '../lib/guides';\n\nconst allGuides = await getAllGuides();  \nconst url = new URL(Astro.request.url);\nconst categoryParam = url.searchParams.get('category');\n\n// filter guides if categoryParam is provided\nconst filteredGuides = categoryParam\n  ? allGuides.filter(g => g.category.toLowerCase() === categoryParam.toLowerCase())\n  : allGuides;\n---\n\n<GuideList guides={filteredGuides} />\n\n<script is:inline type=\"module\">\n  // if you want client-side sync of URL → UI\n  const params = new URLSearchParams(window.location.search);\n  const current = params.get('category');\n  window.history.replaceState({}, '', window.location.pathname + (current ? `?category=${current}` : ''));\n</script>\n```\n\nAnd for the `getAllGuides` helper:\n\n```ts\n// src/lib/guides.ts\nimport guideFiles from '../data/guides/*.md';  // or whichever loader is used\n\nexport interface Guide {\n  title: string;\n  slug: string;\n  category: string;  // “Textual”, “Question”, etc.\n  // other metadata\n}\n\nexport async function getAllGuides(): Promise<Guide[]> {\n  const guides = await Promise.all(\n    Object.entries(guideFiles).map(async ([_, file]) => {\n      const { frontmatter } = await file.metadata();\n      return {\n        title: frontmatter.title,\n        slug: file.slug,\n        category: frontmatter.category || 'textual',  // default if missing\n        // …\n      }\n    })\n  );\n  return guides;\n}\n```\n\nOptionally, you could also do filtering server-side or at build time, but a client‑aware version is a good start.\n\n---\n\n## 4. Tests / Test Cases\n\nYou may write tests (e.g. for a utility function) or manual QA scenarios like:\n\n* **No `category` param** → all guides displayed\n* `?category=textual` → only guides with category `\"textual\"` (case-insensitive)\n* `?category=question` → only guides with category `\"question\"`\n* Invalid/unrecognized `category` value → fallback to “none found” or show all (depending on desired logic)\n* Changing the query param in the browser should update the visible list\n* Bookmarking a category URL should render correctly when visited directly\n\nIf the repo uses a testing framework (e.g. Vitest / Jest), you can add unit tests around the filtering helper function.\n\n---\n\n## 5. Thank You 🙏\n\nThanks for maintaining this awesome project — `developer-roadmap` and roadmap.sh are super helpful to the community.\nI’m happy to contribute a PR for this feature once the design is agreed upon.\n",
+        "reactions": {
+          "url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/issues/9227/reactions",
+          "total_count": 5,
+          "+1": 1,
+          "-1": 0,
+          "laugh": 0,
+          "hooray": 1,
+          "confused": 0,
+          "heart": 1,
+          "rocket": 1,
+          "eyes": 1
+        },
+        "timeline_url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/issues/9227/timeline",
+        "performed_via_github_app": null,
+        "state_reason": "not_planned"
+      },
+      "comment": {
+        "url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/issues/comments/3396866783",
+        "html_url": "https://github.com/kamranahmedse/developer-roadmap/issues/9227#issuecomment-3396866783",
+        "issue_url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/issues/9227",
+        "id": 3396866783,
+        "node_id": "IC_kwDOBRIuNs7KeBLf",
+        "user": {
+          "login": "kamranahmedse",
+          "id": 4921183,
+          "node_id": "MDQ6VXNlcjQ5MjExODM=",
+          "avatar_url": "https://avatars.githubusercontent.com/u/4921183?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/kamranahmedse",
+          "html_url": "https://github.com/kamranahmedse",
+          "followers_url": "https://api.github.com/users/kamranahmedse/followers",
+          "following_url": "https://api.github.com/users/kamranahmedse/following{/other_user}",
+          "gists_url": "https://api.github.com/users/kamranahmedse/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/kamranahmedse/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/kamranahmedse/subscriptions",
+          "organizations_url": "https://api.github.com/users/kamranahmedse/orgs",
+          "repos_url": "https://api.github.com/users/kamranahmedse/repos",
+          "events_url": "https://api.github.com/users/kamranahmedse/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/kamranahmedse/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "created_at": "2025-10-13T10:30:20Z",
+        "updated_at": "2025-10-13T10:30:20Z",
+        "body": "Thanks but there are no plans for that yet. We might do that once we get to the planned redesign.",
+        "reactions": {
+          "url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/issues/comments/3396866783/reactions",
+          "total_count": 1,
+          "+1": 0,
+          "-1": 0,
+          "laugh": 0,
+          "hooray": 0,
+          "confused": 0,
+          "heart": 1,
+          "rocket": 0,
+          "eyes": 0
+        },
+        "performed_via_github_app": null
+      }
+    },
+    "public": true,
+    "created_at": "2025-10-13T10:30:20Z"
+  },
+  {
+    "id": "3987406148",
+    "type": "WatchEvent",
+    "actor": {
+      "id": 4921183,
+      "login": "kamranahmedse",
+      "display_login": "kamranahmedse",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/kamranahmedse",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4921183?"
+    },
+    "repo": {
+      "id": 203974859,
+      "name": "tvogels/slidekit",
+      "url": "https://api.github.com/repos/tvogels/slidekit"
+    },
+    "payload": {
+      "action": "started"
+    },
+    "public": true,
+    "created_at": "2025-10-12T06:41:41Z"
+  }
+]

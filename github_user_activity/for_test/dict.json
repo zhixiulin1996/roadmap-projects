@@ -1,0 +1,353 @@
+[
+  {
+    "id": "4201646672",
+    "type": "WatchEvent",
+    "actor": {
+      "id": 4921183,
+      "login": "kamranahmedse",
+      "display_login": "kamranahmedse",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/kamranahmedse",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4921183?"
+    },
+    "repo": {
+      "id": 692174763,
+      "name": "Obra-Studio/obra-icons-mr",
+      "url": "https://api.github.com/repos/Obra-Studio/obra-icons-mr"
+    },
+    "payload": {
+      "action": "started"
+    },
+    "public": true,
+    "created_at": "2025-10-23T02:10:00Z",
+    "org": {
+      "id": 145154303,
+      "login": "Obra-Studio",
+      "gravatar_id": "",
+      "url": "https://api.github.com/orgs/Obra-Studio",
+      "avatar_url": "https://avatars.githubusercontent.com/u/145154303?"
+    }
+  },
+  {
+    "id": "5375856693",
+    "type": "PushEvent",
+    "actor": {
+      "id": 4921183,
+      "login": "kamranahmedse",
+      "display_login": "kamranahmedse",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/kamranahmedse",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4921183?"
+    },
+    "repo": {
+      "id": 85077558,
+      "name": "kamranahmedse/developer-roadmap",
+      "url": "https://api.github.com/repos/kamranahmedse/developer-roadmap"
+    },
+    "payload": {
+      "repository_id": 85077558,
+      "push_id": 27665828802,
+      "ref": "refs/heads/master",
+      "head": "36f20b31f4f4f183c52eb2580eaf4ca8b873b3a5",
+      "before": "0d0060c98d08e6624fcc12427f6c476c564d9a34"
+    },
+    "public": true,
+    "created_at": "2025-10-22T05:39:20Z"
+  },
+  {
+    "id": "4162238770",
+    "type": "IssuesEvent",
+    "actor": {
+      "id": 4921183,
+      "login": "kamranahmedse",
+      "display_login": "kamranahmedse",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/kamranahmedse",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4921183?"
+    },
+    "repo": {
+      "id": 85077558,
+      "name": "kamranahmedse/developer-roadmap",
+      "url": "https://api.github.com/repos/kamranahmedse/developer-roadmap"
+    },
+    "payload": {
+      "action": "closed",
+      "issue": {
+        "url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/issues/9218",
+        "repository_url": "https://api.github.com/repos/kamranahmedse/developer-roadmap",
+        "labels_url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/issues/9218/labels{/name}",
+        "comments_url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/issues/9218/comments",
+        "events_url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/issues/9218/events",
+        "html_url": "https://github.com/kamranahmedse/developer-roadmap/issues/9218",
+        "id": 3483388343,
+        "node_id": "I_kwDOBRIuNs7PoEm3",
+        "number": 9218,
+        "title": "bug: AI quiz, invalid checks - correct answer marked as invalid",
+        "user": {
+          "login": "devzom",
+          "id": 1417473,
+          "node_id": "MDQ6VXNlcjE0MTc0NzM=",
+          "avatar_url": "https://avatars.githubusercontent.com/u/1417473?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/devzom",
+          "html_url": "https://github.com/devzom",
+          "followers_url": "https://api.github.com/users/devzom/followers",
+          "following_url": "https://api.github.com/users/devzom/following{/other_user}",
+          "gists_url": "https://api.github.com/users/devzom/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/devzom/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/devzom/subscriptions",
+          "organizations_url": "https://api.github.com/users/devzom/orgs",
+          "repos_url": "https://api.github.com/users/devzom/repos",
+          "events_url": "https://api.github.com/users/devzom/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/devzom/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "labels": [
+          {
+            "id": 561371921,
+            "node_id": "MDU6TGFiZWw1NjEzNzE5MjE=",
+            "url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/labels/bug",
+            "name": "bug",
+            "color": "ee0701",
+            "default": true,
+            "description": "Indicates an unexpected problem or unintended behavior"
+          }
+        ],
+        "state": "closed",
+        "locked": false,
+        "assignee": null,
+        "assignees": [],
+        "milestone": null,
+        "comments": 1,
+        "created_at": "2025-10-04T08:11:39Z",
+        "updated_at": "2025-10-21T12:48:56Z",
+        "closed_at": "2025-10-21T12:48:56Z",
+        "active_lock_reason": null,
+        "sub_issues_summary": {
+          "total": 0,
+          "completed": 0,
+          "percent_completed": 0
+        },
+        "issue_dependencies_summary": {
+          "blocked_by": 0,
+          "total_blocked_by": 0,
+          "blocking": 0,
+          "total_blocking": 0
+        },
+        "body": "### What is the URL where the issue is happening\n\nhttps://roadmap.sh/ai/quiz/javascript-fundamentals-quiz-1759565276780\n\n### What browsers are you seeing the problem on?\n\nChrome\n\n### Describe the Bug\n\nIt appear that generated AI quiz miss the correct context and detect questions as incorrectly, when they're not incorrect.\n\n<img width=\"1966\" height=\"957\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/ca38734e-3a37-42c2-b99f-ea2c24091552\" />\n\n> Incorrect Answer\n> The typeof operator in JavaScript is used to determine the data type of a variable. It returns a string indicating the type of the operand. For example, typeof 42 returns \"number\", and typeof \"hello\" returns \"string\".\n\nthat's not right\n\n### Output from browser console (if any)\n\n_No response_\n\n### Participation\n\n- [ ] I am willing to submit a pull request for this issue.",
+        "reactions": {
+          "url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/issues/9218/reactions",
+          "total_count": 1,
+          "+1": 0,
+          "-1": 0,
+          "laugh": 0,
+          "hooray": 0,
+          "confused": 0,
+          "heart": 0,
+          "rocket": 1,
+          "eyes": 0
+        },
+        "timeline_url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/issues/9218/timeline",
+        "performed_via_github_app": null,
+        "state_reason": "completed"
+      }
+    },
+    "public": true,
+    "created_at": "2025-10-21T12:48:59Z"
+  },
+  {
+    "id": "4162237808",
+    "type": "IssueCommentEvent",
+    "actor": {
+      "id": 4921183,
+      "login": "kamranahmedse",
+      "display_login": "kamranahmedse",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/kamranahmedse",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4921183?"
+    },
+    "repo": {
+      "id": 85077558,
+      "name": "kamranahmedse/developer-roadmap",
+      "url": "https://api.github.com/repos/kamranahmedse/developer-roadmap"
+    },
+    "payload": {
+      "action": "created",
+      "issue": {
+        "url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/issues/9218",
+        "repository_url": "https://api.github.com/repos/kamranahmedse/developer-roadmap",
+        "labels_url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/issues/9218/labels{/name}",
+        "comments_url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/issues/9218/comments",
+        "events_url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/issues/9218/events",
+        "html_url": "https://github.com/kamranahmedse/developer-roadmap/issues/9218",
+        "id": 3483388343,
+        "node_id": "I_kwDOBRIuNs7PoEm3",
+        "number": 9218,
+        "title": "bug: AI quiz, invalid checks - correct answer marked as invalid",
+        "user": {
+          "login": "devzom",
+          "id": 1417473,
+          "node_id": "MDQ6VXNlcjE0MTc0NzM=",
+          "avatar_url": "https://avatars.githubusercontent.com/u/1417473?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/devzom",
+          "html_url": "https://github.com/devzom",
+          "followers_url": "https://api.github.com/users/devzom/followers",
+          "following_url": "https://api.github.com/users/devzom/following{/other_user}",
+          "gists_url": "https://api.github.com/users/devzom/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/devzom/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/devzom/subscriptions",
+          "organizations_url": "https://api.github.com/users/devzom/orgs",
+          "repos_url": "https://api.github.com/users/devzom/repos",
+          "events_url": "https://api.github.com/users/devzom/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/devzom/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "labels": [
+          {
+            "id": 561371921,
+            "node_id": "MDU6TGFiZWw1NjEzNzE5MjE=",
+            "url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/labels/bug",
+            "name": "bug",
+            "color": "ee0701",
+            "default": true,
+            "description": "Indicates an unexpected problem or unintended behavior"
+          }
+        ],
+        "state": "closed",
+        "locked": false,
+        "assignee": null,
+        "assignees": [],
+        "milestone": null,
+        "comments": 1,
+        "created_at": "2025-10-04T08:11:39Z",
+        "updated_at": "2025-10-21T12:48:56Z",
+        "closed_at": "2025-10-21T12:48:56Z",
+        "active_lock_reason": null,
+        "sub_issues_summary": {
+          "total": 0,
+          "completed": 0,
+          "percent_completed": 0
+        },
+        "issue_dependencies_summary": {
+          "blocked_by": 0,
+          "total_blocked_by": 0,
+          "blocking": 0,
+          "total_blocking": 0
+        },
+        "body": "### What is the URL where the issue is happening\n\nhttps://roadmap.sh/ai/quiz/javascript-fundamentals-quiz-1759565276780\n\n### What browsers are you seeing the problem on?\n\nChrome\n\n### Describe the Bug\n\nIt appear that generated AI quiz miss the correct context and detect questions as incorrectly, when they're not incorrect.\n\n<img width=\"1966\" height=\"957\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/ca38734e-3a37-42c2-b99f-ea2c24091552\" />\n\n> Incorrect Answer\n> The typeof operator in JavaScript is used to determine the data type of a variable. It returns a string indicating the type of the operand. For example, typeof 42 returns \"number\", and typeof \"hello\" returns \"string\".\n\nthat's not right\n\n### Output from browser console (if any)\n\n_No response_\n\n### Participation\n\n- [ ] I am willing to submit a pull request for this issue.",
+        "reactions": {
+          "url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/issues/9218/reactions",
+          "total_count": 1,
+          "+1": 0,
+          "-1": 0,
+          "laugh": 0,
+          "hooray": 0,
+          "confused": 0,
+          "heart": 0,
+          "rocket": 1,
+          "eyes": 0
+        },
+        "timeline_url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/issues/9218/timeline",
+        "performed_via_github_app": null,
+        "state_reason": "completed"
+      },
+      "comment": {
+        "url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/issues/comments/3426443653",
+        "html_url": "https://github.com/kamranahmedse/developer-roadmap/issues/9218#issuecomment-3426443653",
+        "issue_url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/issues/9218",
+        "id": 3426443653,
+        "node_id": "IC_kwDOBRIuNs7MO2GF",
+        "user": {
+          "login": "kamranahmedse",
+          "id": 4921183,
+          "node_id": "MDQ6VXNlcjQ5MjExODM=",
+          "avatar_url": "https://avatars.githubusercontent.com/u/4921183?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/kamranahmedse",
+          "html_url": "https://github.com/kamranahmedse",
+          "followers_url": "https://api.github.com/users/kamranahmedse/followers",
+          "following_url": "https://api.github.com/users/kamranahmedse/following{/other_user}",
+          "gists_url": "https://api.github.com/users/kamranahmedse/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/kamranahmedse/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/kamranahmedse/subscriptions",
+          "organizations_url": "https://api.github.com/users/kamranahmedse/orgs",
+          "repos_url": "https://api.github.com/users/kamranahmedse/repos",
+          "events_url": "https://api.github.com/users/kamranahmedse/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/kamranahmedse/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "created_at": "2025-10-21T12:48:56Z",
+        "updated_at": "2025-10-21T12:48:56Z",
+        "body": "Thank you for reporting, this should be fixed now.",
+        "reactions": {
+          "url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/issues/comments/3426443653/reactions",
+          "total_count": 1,
+          "+1": 0,
+          "-1": 0,
+          "laugh": 0,
+          "hooray": 1,
+          "confused": 0,
+          "heart": 0,
+          "rocket": 0,
+          "eyes": 0
+        },
+        "performed_via_github_app": null
+      }
+    },
+    "public": true,
+    "created_at": "2025-10-21T12:48:56Z"
+  },
+  {
+    "id": "4138711459",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 4921183,
+      "login": "kamranahmedse",
+      "display_login": "kamranahmedse",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/kamranahmedse",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4921183?"
+    },
+    "repo": {
+      "id": 85077558,
+      "name": "kamranahmedse/developer-roadmap",
+      "url": "https://api.github.com/repos/kamranahmedse/developer-roadmap"
+    },
+    "payload": {
+      "action": "closed",
+      "number": 9220,
+      "pull_request": {
+        "url": "https://api.github.com/repos/kamranahmedse/developer-roadmap/pulls/9220",
+        "id": 2888049459,
+        "number": 9220,
+        "head": {
+          "ref": "refactor/performance",
+          "sha": "9350975b2b311bea6987b1fc6724bbd3cb64865b",
+          "repo": {
+            "id": 1068371165,
+            "url": "https://api.github.com/repos/abdo-spices/developer-roadmap",
+            "name": "developer-roadmap"
+          }
+        },
+        "base": {
+          "ref": "master",
+          "sha": "8247f19850d11874e2f6e03ebe0b789ea6754806",
+          "repo": {
+            "id": 85077558,
+            "url": "https://api.github.com/repos/kamranahmedse/developer-roadmap",
+            "name": "developer-roadmap"
+          }
+        }
+      }
+    },
+    "public": true,
+    "created_at": "2025-10-05T18:53:48Z"
+  }
+]

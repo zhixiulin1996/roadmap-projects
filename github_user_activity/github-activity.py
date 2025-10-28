@@ -10,62 +10,85 @@ Note.
 """
 import requests
 import sys
-from collections import defaultdict
 from datetime import datetime, timezone
 
 # global variable
-summary = []
+summary = [] # Use to stored summarized event data
+tmp_dict = {} # Use to deal with cumulative events
+
+def one_time_event(event):
+    #todo: add comment here
+    # event: dict
+    global summary
+    repo = event['repo']['name']
+    type = event['type']
+    payload = event.get('payload', {})
+
+    # Judge Event Type and Add to summary
+    if type == "WatchEvent":
+        summary.append(f"Starred {repo}.")
+    elif type == "ForkEvent":  #todo: need sample and verify
+        summary.append(f"Forked {repo}.") 
+    elif type == "CreateEvent":
+        ref_type = payload.get('ref_type')
+        ref = payload.get('ref')
+        summary.append(f"Created {ref_type} ({ref}) in {repo}.")
+    elif type == "DeleteEvent": 
+        ref_type = payload.get('ref_type')
+        ref = payload.get('ref')
+        summary.append(f"Deleted {ref_type} ({ref}) in {repo}.")
+    elif type == "MemberEvent": #todo: need sample and verify
+        action = payload.get('action')
+        member = payload.get("member",{}).get("login")
+        if action =="added" and member:
+            summary.append(f"Added {member} as a collaborator in {repo}.")
+    elif type == "PublicEvent": #todo: need sample and verify
+        summary.append(f"Made {repo} public.")
+
+def cumulative_event(event):
+    #todo: add comment here
+    # event: dict
+    global summary, tmp_dict
+    repo = event['repo']['name']
+    type = event['type']
+    payload = event.get('payload', {})
+    if type == "PushEvent":
+        tmp_dict[(type, repo)] = tmp_dict.get((type, repo), 0) + 1
+    elif type in ["IssuesEvent","PullRequestEvent"]:
+        action = payload.get('action')
+        if action in ["opened","closed"]:
+            tmp_dict[(type, action, repo)] = tmp_dict.get((type, action, repo), 0) + 1
+    elif type == "IssueCommentEvent":
+        action = payload.get('action')
+        if action in ["created","deleted"]:
+            tmp_dict[(type, action, repo)] = tmp_dict.get((type, action, repo), 0) + 1
+
+
+
 
 def generate_event_summary(events):
     # todo: add comment here
-    global summary
+    global summary, tmp_dict
 
     # Deal with events one by one
     for event in events:
-        repo = event['repo']['name']
-        type = event['type']
-        payload = event.get('payload', {})
-
-        # One-Time Event
-        if type == "WatchEvent":
-            summary.append(f"Starred {repo}")
-        elif type == "ForkEvent": #todo: need sample and verify
-            summary.append(f"Forked {repo}")
-        elif type == "CreateEvent":
-            ref_type = payload.get('ref_type')
-            ref = payload.get('ref')
-            summary.append(f"Created {ref_type} ({ref}) in {repo}")
-        elif type == "DeleteEvent": 
-            ref_type = payload.get('ref_type')
-            ref = payload.get('ref')
-            summary.append(f"Deleted {ref_type} ({ref}) in {repo}")
-        elif type == "MemberEvent": #todo: need sample and verify
-            pass
-        elif type == "PublicEvent": #todo: need sample and verify
-            pass
+        if event['type'] in ["WatchEvent","ForkEvent","CreateEvent","DeleteEvent","MemberEvent","PublicEvent"]:
+            one_time_event(event)
+        elif event['type'] in ["PushEvent","PullRequestEvent","IssuesEvent","IssueCommentEvent"]:
+            cumulative_event(event)
+    
+    # Append cumulative event information to summary
+    for key, val in tmp_dict.items():
+        if key[0] == "PushEvent":
+            summary.append(f"Pushed {val} commit(s) to {key[1]}.")
+        elif key[0] == "PullRequestEvent":
+            summary.append(f"{'Opened' if key[1]=='opened' else 'Closed'} {val} pull request(s) in {key[2]}.")
+        elif key[0] == "IssuesEvent":
+            summary.append(f"{'Opened' if key[1]=='opened' else 'Closed'} {val} issue(s) in {key[2]}.")
+        elif key[0] == "IssueCommentEvent":
+            summary.append(f"{'Created' if key[1]=='created' else 'Deleted'} {val} comment(s) in {key[2]} issue(s).")
 
 
-
-
-    #     if type == "IssuesEvent":
-    #         action = payload.get('action')
-    #         if action == "opened":
-    #             summary.append(f"Opened a new issue in {repo}")
-    #         elif action == "closed":
-    #             summary.append(f"Closed an issue in {repo}")
-    #     elif type == "PullRequestEvent":
-    #         action = payload.get('action')
-    #         if action == "opened":
-    #             summary.append(f"Opened a pull request in {repo}")
-    #         elif action == "closed":
-    #             summary.append(f"Closed a pull request in {repo}")
-
-    #     
-    #     elif type == "PushEvent":
-    #         summary.append(f"Pushed to {repo}")
-
-    # 加上項目符號並輸出
-    return [f"- {line}" for line in summary]
 
 def fetch_user_events(username, token=None):
     """
@@ -79,8 +102,8 @@ def fetch_user_events(username, token=None):
         401: "Unauthorized – Your token may be missing or incorrect",
         404: "Not Found – The specified user does not exist"}
 
-    url = f"https://api.github.com/users/{username}/events" # 30 events
-    #url = f"https://api.github.com/users/{username}/events?page=1&per_page=100" # 100 events
+    #url = f"https://api.github.com/users/{username}/events" # 30 events
+    url = f"https://api.github.com/users/{username}/events?page=1&per_page=100" # 100 events(page 1)
     headers = {'Accept': 'application/vnd.github.v3+json'}  # Request for GitHub V3 output in json format
     if token:
         headers['Authorization'] = f'token {token}'
@@ -115,13 +138,9 @@ def main():
     username = str(sys.argv[1])
     token = str(sys.argv[2]) if len(sys.argv) == 3 else None  # Default token will be none
     events = fetch_user_events(username, token)
+    generate_event_summary(events)
 
-    
-
-    print("\n".join(generate_event_summary(events)))
-    # print("Output:")
-    # for line in push_summary + other_events:
-    #     print(f"- {line}")
+    print("\n".join(summary))
 
 
 if __name__ == "__main__":
