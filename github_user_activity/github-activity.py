@@ -13,49 +13,59 @@ import sys
 from collections import defaultdict
 from datetime import datetime, timezone
 
+# global variable
+summary = []
 
-# 整理非 PushEvent 類型
-def format_event(event):
+def generate_event_summary(events):
     # todo: add comment here
-    repo = event['repo']['name']
-    type = event['type']
-    payload = event.get('payload', {})
+    global summary
 
-    if type == "IssuesEvent":
-        action = payload.get('action')
-        if action == "opened":
-            return f"Opened a new issue in {repo}"
-        elif action == "closed":
-            return f"Closed an issue in {repo}"
-    elif type == "PullRequestEvent":
-        action = payload.get('action')
-        if action == "opened":
-            return f"Opened a pull request in {repo}"
-        elif action == "closed":
-            return f"Closed a pull request in {repo}"
-    elif type == "WatchEvent":
-        return f"Starred {repo}"
-    elif type == "ForkEvent":
-        return f"Forked {repo}"
-    elif type == "CreateEvent":
-        ref_type = payload.get('ref_type')
-        ref = payload.get('ref')
-        return f"Created {ref_type} {ref} in {repo}"
-    return None
-
-
-# 統計 PushEvent commit 數量（每個 repo 累加）
-def summarize_push_events(events):
-    # todo: add comment here
-    push_summary = defaultdict(int)
+    # Deal with events one by one
     for event in events:
-        if event['type'] == 'PushEvent':
-            repo = event['repo']['name']
-            count = len(event.get('payload', {}).get('commits', []))
-            push_summary[repo] += count
-    return [f"Pushed {count} commit{'s' if count != 1 else ''} to {repo}" for repo, count in push_summary.items() if
-            count > 0]
+        repo = event['repo']['name']
+        type = event['type']
+        payload = event.get('payload', {})
 
+        # One-Time Event
+        if type == "WatchEvent":
+            summary.append(f"Starred {repo}")
+        elif type == "ForkEvent": #todo: need sample and verify
+            summary.append(f"Forked {repo}")
+        elif type == "CreateEvent":
+            ref_type = payload.get('ref_type')
+            ref = payload.get('ref')
+            summary.append(f"Created {ref_type} ({ref}) in {repo}")
+        elif type == "DeleteEvent": 
+            ref_type = payload.get('ref_type')
+            ref = payload.get('ref')
+            summary.append(f"Deleted {ref_type} ({ref}) in {repo}")
+        elif type == "MemberEvent": #todo: need sample and verify
+            pass
+        elif type == "PublicEvent": #todo: need sample and verify
+            pass
+
+
+
+
+    #     if type == "IssuesEvent":
+    #         action = payload.get('action')
+    #         if action == "opened":
+    #             summary.append(f"Opened a new issue in {repo}")
+    #         elif action == "closed":
+    #             summary.append(f"Closed an issue in {repo}")
+    #     elif type == "PullRequestEvent":
+    #         action = payload.get('action')
+    #         if action == "opened":
+    #             summary.append(f"Opened a pull request in {repo}")
+    #         elif action == "closed":
+    #             summary.append(f"Closed a pull request in {repo}")
+
+    #     
+    #     elif type == "PushEvent":
+    #         summary.append(f"Pushed to {repo}")
+
+    # 加上項目符號並輸出
+    return [f"- {line}" for line in summary]
 
 def fetch_user_events(username, token=None):
     """
@@ -69,7 +79,8 @@ def fetch_user_events(username, token=None):
         401: "Unauthorized – Your token may be missing or incorrect",
         404: "Not Found – The specified user does not exist"}
 
-    url = f"https://api.github.com/users/{username}/events"
+    url = f"https://api.github.com/users/{username}/events" # 30 events
+    #url = f"https://api.github.com/users/{username}/events?page=1&per_page=100" # 100 events
     headers = {'Accept': 'application/vnd.github.v3+json'}  # Request for GitHub V3 output in json format
     if token:
         headers['Authorization'] = f'token {token}'
@@ -99,19 +110,18 @@ def convert_to_local_time(utc_str):
 
 def main():
     # todo: add comment here
+    
     # Fetch user events from server and store to "events"(type: list)
     username = str(sys.argv[1])
     token = str(sys.argv[2]) if len(sys.argv) == 3 else None  # Default token will be none
     events = fetch_user_events(username, token)
 
-    # TBC
-    push_summary = summarize_push_events(events)
-    other_events = [format_event(e) for e in events if e['type'] != 'PushEvent']
-    # other_events = [e for e in other_events if e]  # 過濾 None
+    
 
-    print("Output:")
-    for line in push_summary + other_events:
-        print(f"- {line}")
+    print("\n".join(generate_event_summary(events)))
+    # print("Output:")
+    # for line in push_summary + other_events:
+    #     print(f"- {line}")
 
 
 if __name__ == "__main__":
