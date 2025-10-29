@@ -1,4 +1,4 @@
-# Task-Tracker-CLI
+# Expense Tracker
 ## Basic Intorduction
 Task tracker is a project used to track and manage your tasks. In this task, you will build a simple command line interface (CLI) to track what you need to do, what you have done, and what you are currently working on.
 (This project is the idea of roadmap.sh (URL: https://roadmap.sh/projects/task-tracker))
@@ -26,3 +26,16 @@ The commands for this application are listed as below:
 
 1. You can refer to <b><u>test_program.sh</u></b> for these command usage.
 2. These command is for Linux OS, if your OS is Windows please use `python task-cli.py [command] [argv]`
+
+
+
+# Start from here
+
+Usage:
+```bash
+$ python expense_tracker.py add --description "Lunch" --amount 20
+$ python expense_tracker.py list
+$ python expense_tracker.py summary
+$ python expense_tracker.py delete --id 1
+$ python expense_tracker.py summary --month 8
+```

@@ -1,25 +1,3 @@
-"""
-File: task-cli.py
-Name: Zhi-Xiu Lin
--------------------------------
-This is a project used to track and manage user's tasks.
-In this task, you will build a simple command line interface (CLI) to track:
-1. what you need to do?
-2. what you have done?
-3. what you are currently working on?
--------------------------------
-Note.
-- Please refer to README.md for the usage
-"""
-import json
-import os
-import sys
-from datetime import datetime
-
-# Define the file name of json file
-TASK_FILE = "tasks.json"
-
-
 def load_tasks():
     """
     Input: None
@@ -209,3 +187,112 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+#################################
+"""
+File: expense-tracker.py
+Name: Zhi-Xiu Lin
+-------------------------------
+#todo: comment here
+-------------------------------
+Note.
+- Please refer to README.md for the usage
+"""
+import argparse
+import json
+import os
+import datetime
+
+# Define the file name of json file
+DATA_FILE = 'expenses.json'
+
+def load_expenses():
+    if os.path.exists(DATA_FILE):
+        with open(DATA_FILE, 'r') as f:
+            return json.load(f)
+    return []
+
+def save_expenses(expenses):
+    with open(DATA_FILE, 'w') as f:
+        json.dump(expenses, f, indent=2)
+
+def add_expense(description, amount):
+    expenses = load_expenses()
+    new_id = 1 if not expenses else expenses[-1]['id'] + 1
+    today = datetime.date.today().isoformat()
+    expenses.append({
+        'id': new_id,
+        'date': today,
+        'description': description,
+        'amount': amount
+    })
+    save_expenses(expenses)
+    print(f"Expense added successfully (ID: {new_id})")
+
+def list_expenses():
+    expenses = load_expenses()
+    print(f"{'ID':<4} {'Date':<12} {'Description':<12} {'Amount'}")
+    for e in expenses:
+        print(f"{e['id']:<4} {e['date']:<12} {e['description']:<12} ${e['amount']}")
+
+def delete_expense(expense_id):
+    expenses = load_expenses()
+    new_expenses = [e for e in expenses if e['id'] != expense_id]
+    if len(new_expenses) < len(expenses):
+        save_expenses(new_expenses)
+        print("Expense deleted successfully")
+    else:
+        print("Expense not found")
+
+def summary(month=None):
+    expenses = load_expenses()
+    total = 0
+    for e in expenses:
+        if month:
+            if int(e['date'].split('-')[1]) == month:
+                total += e['amount']
+        else:
+            total += e['amount']
+    if month:
+        print(f"Total expenses for August: ${total}")
+    else:
+        print(f"Total expenses: ${total}")
+
+def main():
+    parser = argparse.ArgumentParser(prog="expense-tracker")
+    subparsers = parser.add_subparsers(dest="command")
+
+    add_parser = subparsers.add_parser("add")
+    add_parser.add_argument("--description", required=True)
+    add_parser.add_argument("--amount", type=float, required=True)
+
+    subparsers.add_parser("list")
+
+    delete_parser = subparsers.add_parser("delete")
+    delete_parser.add_argument("--id", type=int, required=True)
+
+    summary_parser = subparsers.add_parser("summary")
+    summary_parser.add_argument("--month", type=int)
+
+    args = parser.parse_args()
+
+    if args.command == "add":
+        add_expense(args.description, args.amount)
+    elif args.command == "list":
+        list_expenses()
+    elif args.command == "delete":
+        delete_expense(args.id)
+    elif args.command == "summary":
+        summary(args.month)
+    else:
+        parser.print_help()
+
+if __name__ == "__main__":
+    main()
+"""
+$ python expense_tracker.py add --description "Lunch" --amount 20
+$ python expense_tracker.py list
+$ python expense_tracker.py summary
+$ python expense_tracker.py delete --id 1
+$ python expense_tracker.py summary --month 8
+"""
