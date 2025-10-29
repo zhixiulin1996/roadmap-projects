@@ -7,6 +7,7 @@
 - Default can bulk 30 events per request (up to 100 events per request)
 - Separate events into one-time events or cumulative event
 - Deal with only part of but most of events in GitHub (support event and the action refer to the Supported Event Types)
+- Will reveal searching time range in user's time zone
 
 ## Supported Event Types
 One-Time Event:

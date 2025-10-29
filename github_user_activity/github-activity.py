@@ -8,7 +8,8 @@ activity of a GitHub user and display it in the terminal.
 Note.
 - Please refer to README.md for the usage and detailed introduction
 """
-import requests
+import urllib.request
+import json
 import sys
 from datetime import datetime, timezone
 
@@ -26,24 +27,24 @@ def one_time_event(event):
 
     # Judge Event Type and Add to summary
     if type == "WatchEvent":
-        summary.append(f"Starred {repo}.")
-    elif type == "ForkEvent":  #todo: need sample and verify
-        summary.append(f"Forked {repo}.") 
+        summary.append(f"- Starred {repo}.")
+    elif type == "ForkEvent":
+        summary.append(f"- Forked {repo}.") 
     elif type == "CreateEvent":
         ref_type = payload.get('ref_type')
         ref = payload.get('ref')
-        summary.append(f"Created {ref_type} ({ref}) in {repo}.")
+        summary.append(f"- Created {ref_type} ({ref}) in {repo}.")
     elif type == "DeleteEvent": 
         ref_type = payload.get('ref_type')
         ref = payload.get('ref')
-        summary.append(f"Deleted {ref_type} ({ref}) in {repo}.")
-    elif type == "MemberEvent": #todo: need sample and verify
+        summary.append(f"- Deleted {ref_type} ({ref}) in {repo}.")
+    elif type == "MemberEvent":
         action = payload.get('action')
         member = payload.get("member",{}).get("login")
         if action =="added" and member:
-            summary.append(f"Added {member} as a collaborator in {repo}.")
-    elif type == "PublicEvent": #todo: need sample and verify
-        summary.append(f"Made {repo} public.")
+            summary.append(f"- Added {member} as a collaborator in {repo}.")
+    elif type == "PublicEvent":
+        summary.append(f"- Made {repo} public.")
 
 def cumulative_event(event):
     #todo: add comment here
@@ -80,13 +81,13 @@ def generate_event_summary(events):
     # Append cumulative event information to summary
     for key, val in tmp_dict.items():
         if key[0] == "PushEvent":
-            summary.append(f"Pushed {val} commit(s) to {key[1]}.")
+            summary.append(f"- Pushed {val} commit(s) to {key[1]}.")
         elif key[0] == "PullRequestEvent":
-            summary.append(f"{'Opened' if key[1]=='opened' else 'Closed'} {val} pull request(s) in {key[2]}.")
+            summary.append(f"- {'Opened' if key[1]=='opened' else 'Closed'} {val} pull request(s) in {key[2]}.")
         elif key[0] == "IssuesEvent":
-            summary.append(f"{'Opened' if key[1]=='opened' else 'Closed'} {val} issue(s) in {key[2]}.")
+            summary.append(f"- {'Opened' if key[1]=='opened' else 'Closed'} {val} issue(s) in {key[2]}.")
         elif key[0] == "IssueCommentEvent":
-            summary.append(f"{'Created' if key[1]=='created' else 'Deleted'} {val} comment(s) in {key[2]} issue(s).")
+            summary.append(f"- {'Created' if key[1]=='created' else 'Deleted'} {val} comment(s) in {key[2]} issue(s).")
 
 
 
@@ -102,34 +103,53 @@ def fetch_user_events(username, token=None):
         401: "Unauthorized – Your token may be missing or incorrect",
         404: "Not Found – The specified user does not exist"}
 
+    # Data required to send HTTP request
     #url = f"https://api.github.com/users/{username}/events" # 30 events
     url = f"https://api.github.com/users/{username}/events?page=1&per_page=100" # 100 events(page 1)
-    headers = {'Accept': 'application/vnd.github.v3+json'}  # Request for GitHub V3 output in json format
+    headers = {"Accept": "application/vnd.github.v3+json","User-Agent": "Python-urllib"}
     if token:
-        headers['Authorization'] = f'token {token}'
-    response = requests.get(url, headers=headers)
-    # Exception handling
-    if response.status_code != 200:
-        print(f"Event code: {response.status_code} ({error_code[response.status_code]})")
+        headers["Authorization"] = f"token {token}"
+
+    # Send http request
+    req = urllib.request.Request(url, headers=headers)
+    try:
+        with urllib.request.urlopen(req) as response:
+            data = response.read()
+            return json.loads(data)
+    except urllib.error.HTTPError as e:
+        code = e.code
+        message = error_code.get(code, f"HTTP Error {code}") #if code is not in dictionary, return formatted string
+        print(f"Event code: {code} ({message})")
         return []
-    return response.json()
+    except urllib.error.URLError as e:
+        print(f"URL Error: {e.reason}")
+        return []
+    
 
-
-def convert_to_local_time(utc_str):
+def find_time_range(events):
     """
-    Convert a UTC timestamp string from the GitHub API to the user's local time zone.
-    :param utc_str: (str) the time stamp string from GitHub API
-    :return: (str)the formatted timestamp string in the user's local time zone
+    1. Iterate through the events find the max/min time stamp of these events 
+    2. Convert them to user's local time zone
+    :param events: (list) the recent 30 events of user in json form
+    :return: (list) the min/max time stamp string from GitHub API in user's time zone
     """
-    # Convert time stamp string from GitHub API to datetime object
-    utc_time = datetime.strptime(utc_str, "%Y-%m-%dT%H:%M:%SZ")
-    # Specify the time stamp time zone which is UTC
-    utc_time = utc_time.replace(tzinfo=timezone.utc)
-    # Convert to user's system time zone
-    local_time = utc_time.astimezone()
-    # Return the time stamp string with desired format
-    return local_time.strftime("%Y-%m-%d %H:%M")
+    time_stamp = []
+    dt_list = []
+    for event in events:
+        time_stamp.append(event['created_at'])
+    
+    for utc_str in time_stamp:
+        # Convert time stamp string to datetime object
+        utc_time = datetime.strptime(utc_str, "%Y-%m-%dT%H:%M:%SZ")
+        # Specify the time stamp time zone which is UTC
+        utc_time = utc_time.replace(tzinfo=timezone.utc)
+        # Convert to user's system time zone
+        local_time = utc_time.astimezone()
+        # Formatted
+        formatted = local_time.strftime("%Y-%m-%d %H:%M (UTC%z)")
+        dt_list.append(formatted)
 
+    return [min(dt_list),max(dt_list)]
 
 def main():
     # todo: add comment here
@@ -139,29 +159,16 @@ def main():
     token = str(sys.argv[2]) if len(sys.argv) == 3 else None  # Default token will be none
     events = fetch_user_events(username, token)
     generate_event_summary(events)
-
-    print("\n".join(summary))
+    
+    if summary:
+        # Time range
+        time_range = find_time_range(events) 
+        # Output  
+        print(f"[Time Range] From {time_range[0]} To {time_range[1]}")
+        print(f"[Fetched User] {username}")
+        print("[Output]")
+        print("\n".join(summary))
 
 
 if __name__ == "__main__":
     main()
-
-# todo: add time information(range) to the output
-"""
-timestamps = [
-    "2025-10-27T14:05:00Z",
-    "2025-10-27T18:30:00Z",
-    "2025-10-26T22:15:00Z"
-]
-
-# 轉成 datetime 物件
-dt_list = [datetime.strptime(t, "%Y-%m-%dT%H:%M:%SZ") for t in timestamps]
-
-# 找最早與最晚
-earliest = min(dt_list)
-latest = max(dt_list)
-
-print("最早事件時間：", earliest)
-print("最晚事件時間：", latest)
-
-"""
