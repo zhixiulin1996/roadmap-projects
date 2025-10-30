@@ -66,6 +66,11 @@ def list_expenses():
         print(f"{e['id']:<4} {e['date']:<12} {e['description']:<12} ${e['amount']}")
 
 def delete_expense(expense_id):
+    """
+    delete an expense 
+    :param expense_id: (int) expense id to be deleted
+    :return: none
+    """
     expenses = load_expenses()
     new_expenses = [e for e in expenses if e['id'] != expense_id]
     if len(new_expenses) < len(expenses):
