@@ -1,194 +1,3 @@
-def load_tasks():
-    """
-    Input: None
-    :return: python list (w/ or w/o dictionaries in the list)
-    """
-    # Check if the TASK_FILE exist
-    if os.path.exists(TASK_FILE):
-        with open(TASK_FILE, "r") as f:
-            return json.load(f)
-    return []
-
-
-def save_tasks(tasks):
-    """
-    Save tasks data to json file
-    :param tasks: (list) consists of many dictionaries
-    :return: none
-    """
-    with open(TASK_FILE, "w") as f:
-        json.dump(tasks, f, indent=2)
-
-
-def add_task(content):
-    """
-    Load current task data, add new task and give it an ID
-    :param content: (str) the content of new task
-    :return: none
-    """
-    tasks = load_tasks()
-    new_id = tasks[-1]["id"] + 1 if tasks else 1
-    tasks.append({"id": new_id,
-                  "description": content,
-                  "status": "todo",
-                  "createdAt": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                  "updatedAt": datetime.now().strftime("%Y-%m-%d %H:%M:%S")})
-    save_tasks(tasks)
-    print(f"Task added successfully (ID: {new_id})")
-
-
-def update_task(task_id, new_content):
-    """
-    Updating task content
-    :param task_id: (int) the ID of task
-    :param new_content: (str) the content of the task
-    :return: none
-    """
-    tasks = load_tasks()
-    for task in tasks:
-        if task["id"] == task_id:
-            task["description"] = new_content
-            task['updatedAt'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            save_tasks(tasks)
-            print(f"Task (ID: {task_id}) updated.")
-            return
-    # Exception handling (ID error)
-    print(f"Task (ID: {task_id}) not found.")
-
-
-def delete_task(task_id):
-    """
-    Delete task which id is "task_id"
-    :param task_id: (int) the task id to be deleted
-    :return: none
-    """
-    tasks = load_tasks()
-    new_tasks = [task for task in tasks if task["id"] != task_id]
-    if len(new_tasks) == len(tasks):  # Exception handling (ID error)
-        print(f"Task (ID: {task_id}) not found.")
-    else:
-        save_tasks(new_tasks)
-        print(f"Task (ID: {task_id}) deleted.")
-
-
-def mark_done(task_id):
-    """
-    Mark task status to "done"
-    :param task_id: (int) the task id to be marked done
-    :return: none
-    """
-    tasks = load_tasks()
-    for task in tasks:
-        if task["id"] == task_id:
-            task["status"] = "done"
-            task['updatedAt'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            save_tasks(tasks)
-            print(f"Task (ID: {task_id}) marked as done.")
-            return
-    print(f"Task (ID: {task_id}) not found.")  # Exception handling (ID error)
-
-
-def mark_in_progress(task_id):
-    """
-    Mark task status to "In progress"
-    :param task_id: (int) the task id to be marked in-progress
-    :return: none
-    """
-    tasks = load_tasks()
-    for task in tasks:
-        if task["id"] == task_id:
-            task["status"] = "in-progress"
-            task['updatedAt'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            save_tasks(tasks)
-            print(f"Task (ID: {task_id}) marked as in-progress.")
-            return
-    print(f"Task (ID: {task_id}) not found.")  # Exception handling (ID error)
-
-
-def list_tasks(status):
-    """
-    list all tasks in certain status (contain all tasks)
-    :param status: (str) tasks in which status to be listed.
-    :return: none
-    """
-    found = False
-    tasks = load_tasks()
-    if status == "all":
-        for task in tasks:
-            print(
-                f"Task ID: {task['id']}, Description: {task['description']}, Status: {task['status']}, Create DateTime: {task['createdAt']}, Update DateTime: {task['updatedAt']}")
-            found = True
-        if not found:
-            print("There is no task in the list.")
-    elif status in ("done", "todo", "in-progress"):  # list certain status tasks
-        for task in tasks:
-            if task['status'] == status:
-                print(
-                    f"Task ID: {task['id']}, Description: {task['description']}, Status: {task['status']}, Create DateTime: {task['createdAt']}, Update DateTime: {task['updatedAt']}")
-                found = True
-        if not found:
-            print(f'There is no task in "{status}" status.')
-    else:
-        print(f'No such status: "{status}".')
-
-
-def main():
-    """
-    Main function to judge command and do the corresponding tasks
-    """
-    command = sys.argv[1]
-    # Add function
-    if command == "add":
-        if len(sys.argv) == 3:
-            content = " ".join(sys.argv[2:])
-            add_task(content)
-        else:  # Exception handling
-            print(f"Syntax Error for command '{command}'")
-    # Update function
-    elif command == "update":
-        if len(sys.argv) == 4:
-            task_id = int(sys.argv[2])
-            new_content = " ".join(sys.argv[3:])
-            update_task(task_id, new_content)
-        else:  # Exception handling
-            print(f"Syntax Error for command '{command}'")
-    # Delete function
-    elif command == "delete":
-        if len(sys.argv) == 3:
-            task_id = int(sys.argv[2])
-            delete_task(task_id)
-        else:  # Exception handling
-            print(f"Syntax Error for command '{command}'")
-    # Mark-done function
-    elif command == "mark-done":
-        if len(sys.argv) == 3:
-            task_id = int(sys.argv[2])
-            mark_done(task_id)
-        else:  # Exception handling
-            print(f"Syntax Error for command '{command}'")
-    # Mark-in-progress function
-    elif command == "mark-in-progress":
-        if len(sys.argv) == 3:
-            task_id = int(sys.argv[2])
-            mark_in_progress(task_id)
-        else:  # Exception handling
-            print(f"Syntax Error for command '{command}'")
-    # list function
-    elif command == "list":
-        if len(sys.argv) == 2:
-            list_tasks("all")
-        elif len(sys.argv) == 3:
-            list_tasks(str(sys.argv[2]))
-        else:
-            print(f"Argument Count Error (Command: {command})")  # list command arg count error
-    else:
-        print(f'Unknown command: "{command}".')
-
-
-if __name__ == "__main__":
-    main()
-
-#################################
 """
 File: expense-tracker.py
 Name: Zhi-Xiu Lin
@@ -207,19 +16,34 @@ import datetime
 DATA_FILE = 'expenses.json'
 
 def load_expenses():
+    """
+    Input: None
+    :return: python list (w/ or w/o dictionaries in the list)
+    """
     if os.path.exists(DATA_FILE):
         with open(DATA_FILE, 'r') as f:
             return json.load(f)
     return []
 
 def save_expenses(expenses):
+    """
+    Save expense data to json file
+    :param expenses: (list) consists of many dictionaries
+    :return: none
+    """
     with open(DATA_FILE, 'w') as f:
         json.dump(expenses, f, indent=2)
 
 def add_expense(description, amount):
+    """
+    Add an expense record to application
+    :param description: (str) the description of the added expense
+    :param amount: (float) the price of added expense
+    :return: none
+    """
     expenses = load_expenses()
     new_id = 1 if not expenses else expenses[-1]['id'] + 1
-    today = datetime.date.today().isoformat()
+    today = datetime.date.today().isoformat() # to ISO 8601 format string
     expenses.append({
         'id': new_id,
         'date': today,
@@ -230,8 +54,14 @@ def add_expense(description, amount):
     print(f"Expense added successfully (ID: {new_id})")
 
 def list_expenses():
+    """
+    list all expenses in the application
+    :return: none
+    """
     expenses = load_expenses()
+    # print title name and define column width
     print(f"{'ID':<4} {'Date':<12} {'Description':<12} {'Amount'}")
+    # iterate through the tracker and print
     for e in expenses:
         print(f"{e['id']:<4} {e['date']:<12} {e['description']:<12} ${e['amount']}")
 
@@ -257,25 +87,39 @@ def summary(month=None):
         print(f"Total expenses for August: ${total}")
     else:
         print(f"Total expenses: ${total}")
+def build_parser():
+    # todo: add comment
+    # You can add command here
+    # New main parser
+    parser = argparse.ArgumentParser(prog="expense-tracker")
+    subparsers = parser.add_subparsers(dest="command") #subparser name ="command"(i.e. parser.command will contain command below)
+
+    # Add function
+    add_parser = subparsers.add_parser("add",help="Add a new expense record")
+    add_parser.add_argument("--description", required=True,metavar="[description]",help="Short description of the expense (e.g. Lunch, Taxi)")
+    add_parser.add_argument("--amount", type=float, required=True,metavar="[price]",help="Amount spent in dollars (e.g. 12.5)")
+
+    # list function
+    subparsers.add_parser("list",help="List all expenses")
+
+    # delete function
+    delete_parser = subparsers.add_parser("delete", help="Delete an expense")
+    delete_parser.add_argument("--id", type=int,metavar="[id_number]", required=True, help="The expense ID you want to delete")
+
+    # Summary function
+    summary_parser = subparsers.add_parser("summary")#todo: help
+    summary_parser.add_argument("--month", type=int)#todo: help, metavar
+
+    return parser
+
 
 def main():
-    parser = argparse.ArgumentParser(prog="expense-tracker")
-    subparsers = parser.add_subparsers(dest="command")
-
-    add_parser = subparsers.add_parser("add")
-    add_parser.add_argument("--description", required=True)
-    add_parser.add_argument("--amount", type=float, required=True)
-
-    subparsers.add_parser("list")
-
-    delete_parser = subparsers.add_parser("delete")
-    delete_parser.add_argument("--id", type=int, required=True)
-
-    summary_parser = subparsers.add_parser("summary")
-    summary_parser.add_argument("--month", type=int)
-
+    # todo: comment here
+    # build parser and parse user command
+    parser = build_parser()
     args = parser.parse_args()
 
+    # Judge command and run corresponding function
     if args.command == "add":
         add_expense(args.description, args.amount)
     elif args.command == "list":
