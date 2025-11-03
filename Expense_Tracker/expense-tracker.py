@@ -51,8 +51,7 @@ def add_expense(description, amount, date_in=""):
         dt = datetime.strptime(date_in, "%Y/%m/%d").date().isoformat()
     else:
         dt = date.today().isoformat() # to ISO 8601 format string
-    expenses.append({
-        'id': new_id,
+    expenses.append({'id': new_id,
         'date': dt,
         'description': description,
         'amount': amount
@@ -152,8 +151,17 @@ def summary(year=None,month=None):
 
         
 def build_parser():
-    # todo: add comment
-    # You can add command here
+    """
+    Build and return the command-line argument parser for the expense-tracker application.
+    This function sets up a main parser with subcommands to handle various expense-related operations:
+    - add: Add a new expense record with description, amount, and optional date.
+    - update: Update an existing expense record by ID, with optional new description, amount, or date.
+    - list: Display all recorded expenses.
+    - delete: Remove an expense record by ID.
+    - summary: Show total expenses, either overall, by year, or by specific year/month.
+
+    :return: An argparse.ArgumentParser object configured with all supported subcommands and arguments.
+    """
     # New main parser
     parser = argparse.ArgumentParser(prog="expense-tracker")
     subparsers = parser.add_subparsers(dest="command") #subparser name ="command"(i.e. parser.command will contain command below)
@@ -187,7 +195,15 @@ def build_parser():
 
 
 def main():
-    # todo: comment here
+    """
+    Entry point for the expense-tracker command-line application.
+
+    This function builds the argument parser, parses user input from the command line,
+    and dispatches the appropriate function based on the selected subcommand.
+
+    Please refer to build_parser() for supported commands.(If no valid command is provided, the help message will be displayed.)
+    """
+    
     # build parser and parse user command
     parser = build_parser()
     args = parser.parse_args()
@@ -208,5 +224,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-# todo: check again, formatted and complete the project/README

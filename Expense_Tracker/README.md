@@ -1,70 +1,77 @@
-# Expense Tracker
-## Basic Intorduction
-Task tracker is a project used to track and manage your tasks. In this task, you will build a simple command line interface (CLI) to track what you need to do, what you have done, and what you are currently working on.
-(This project is the idea of roadmap.sh (URL: https://roadmap.sh/projects/task-tracker))
-## Functions
-The application will run from the command line and store your tasks in a JSON file. Functions are listed as below:
-
-1. Add, Update, and Delete tasks
-2. Mark a task as in progress or done
-3. List all tasks
-4. List all tasks that are done
-5. List all tasks that are not done
-6. List all tasks that are in progress
-
+# Expense Tracker CLI
+A simple command-line tool to help you record, update, delete, and summarize your daily expenses. All data is stored locally in a JSON file, making it lightweight and easy to use.The project idea is inspired by [roadmap.sh](https://roadmap.sh/projects/expense-tracker).
+---
+## Features
+- Add new expense records with description, amount, and optional date(in yyyy/mm/dd form)
+- Update existing records by ID
+- Delete expenses
+- List all recorded expenses
+- Summarize total spending by [toatl],by [year] or by [year/month]
+- Stores data in a structured JSON file
+- Includes an example shell script (`example.sh`) to demonstrate usage
+---
+## Requirements
+- Python 3.7+
+- Modules:
+  - `argparse`
+  - `json`
+  - `datetime`
+  - `os`
+---
 ## Usage
-The commands for this application are listed as below:
-
-1. Add task (`python3 task-cli.py add "content"`)
-2. Update task (`python3 task-cli.py update [id] "new_content"`)
-3. Delete task (`python3 task-cli.py delete [id]`)
-4. Mark task as done/in-progress (`python3 task-cli.py mark-done/mark-in-progress [id]`)
-5. List all tasks (`python3 task-cli.py list`)
-6. List all tasks which are in todo/in-progress/done status (`python3 task-cli.py list todo/in-progress/done`)
-
-## Notes
-
-1. You can refer to <b><u>test_program.sh</u></b> for these command usage.
-2. These command is for Linux OS, if your OS is Windows please use `python task-cli.py [command] [argv]`
-
-
-
-# Start from here
-
-Usage:
+Run the CLI tool using:
 ```bash
-$ python expense_tracker.py add --description "Lunch" --amount 20
-$ python expense_tracker.py list
-$ python expense_tracker.py summary
-$ python expense_tracker.py delete --id 1
-$ python expense_tracker.py summary --month 8
+python expense_tracker.py [command] [options]
 ```
+### Available Commands
+|Command|Description|
+|---|---|
+|`add`|	Add a new expense record|
+|`update`|	Update an existing expense by ID|
+|`delete`|	Delete an expense by ID|
+|`list` |List all expenses|
+|`summary`|Show total expenses (overall, yearly, monthly)|
 
-Build a simple expense tracker application to manage your finances. The application should allow users to add, delete, and view their expenses. The application should also provide a summary of the expenses.
+### Examples
+You can also run the included example.sh to see sample usage:
+```bash
+bash example.sh
+```
+Or use commands manually:
 
-Requirements
-Application should run from the command line and should have the following features:
+1. Add an expense
+```bash
+python expense_tracker.py add --description "Lunch" --amount 12.5 --date 2025/11/03
+```
+2. Update an expense
+```bash
+python expense_tracker.py update --id 3 --amount 15.0
+```
+3. Delete an expense
+```bash
+python expense_tracker.py delete --id 3
+```
+4. List all expenses
+```bash
+python expense_tracker.py list
+```
+5. Summarize expenses
+```bash
+python expense_tracker.py summary --year 2025 --month 11
+```
+## Data Storage
+All expense records are saved in a local file named `expenses.json`. Each record includes:
 
-Users can add an expense with a description and amount.
+```json
+{
+  "id": 1,
+  "date": "2025-11-03",
+  "description": "Lunch",
+  "amount": 12.5
+}
+```
+## Testing
+You can modify `example.sh` to test different scenarios or integrate with other scripts.
 
-Users can update an expense.
-
-Users can delete an expense.
-
-Users can view all expenses.
-
-Users can view a summary of all expenses.
-
-Users can view a summary of expenses for a specific month (of current year).
-
-Here are some additional features that you can add to the application:
-
-Add expense categories and allow users to filter expenses by category.
-
-Allow users to set a budget for each month and show a warning when the user exceeds the budget.
-
-Allow users to export expenses to a CSV file.
-
-ZX:
-- Summary function add Year label
-- User can specify date of the expense in yyyy/mm/dd form
+## License
+This project is open-source and free to use for personal or educational purposes.

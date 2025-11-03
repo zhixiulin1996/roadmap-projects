@@ -19,6 +19,7 @@ This repo is primarily for personal learning, but feel free to explore, fork, or
 You can refer to these projects below:
 1. [Task Tracker](https://roadmap.sh/projects/task-tracker)
 2. [GitHub User Activity](https://roadmap.sh/projects/github-user-activity)
+3. [Expense Tracker](https://roadmap.sh/projects/expense-tracker).
 ---
 
 Feel free to clone and build your own versions. Happy coding!
