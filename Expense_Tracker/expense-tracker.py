@@ -48,7 +48,7 @@ def add_expense(description, amount, date_in=""):
     new_id = 1 if not expenses else expenses[-1]['id'] + 1
     amount = round(amount, 2) # round to 2 decimal
     if date_in:
-        dt = datetime.strptime(date, "%Y/%m/%d").date().isoformat()
+        dt = datetime.strptime(date_in, "%Y/%m/%d").date().isoformat()
     else:
         dt = date.today().isoformat() # to ISO 8601 format string
     expenses.append({
@@ -59,6 +59,33 @@ def add_expense(description, amount, date_in=""):
     })
     save_expenses(expenses)
     print(f"Expense added successfully (ID: {new_id})")
+
+def update_expense(expense_id, description=None, amount=None, date_in=None):
+    """
+    Update an expense record to application
+    :param expense_id: (int) expense id to be updated
+    :param description: (str) the description of the updated expense
+    :param amount: (float) the price of updated expense
+    :param date: (str) the date of updated expense in "yyyy/mm/dd" form
+    :return: none
+    """
+    expenses = load_expenses()
+    updated = False
+    if date_in:
+        dt = datetime.strptime(date_in, "%Y/%m/%d").date().isoformat()
+
+    for e in expenses:
+        if e['id'] == expense_id:
+            updated = True
+            e["date"] = dt if date_in else e['date']
+            e['description'] = description if description else e['description']
+            e['amount']= round(amount,2) if amount else e['amount'] # round to 2 decimal
+            print(f"Expense updated successfully")
+            save_expenses(expenses)
+            return
+    if not updated:
+        print("Expense not found")
+
 
 def list_expenses():
     """
@@ -112,7 +139,7 @@ def summary(year=None,month=None):
     # Inform User the summary result
     if not year and month:
         print("Invalid Usage. Please refer to [--help].")
-    elif month not in [i for i in range(1,13)]:
+    elif month and month not in [i for i in range(1,13)]:
         print("Month should be an interger between 1 and 12.")
     else:
         if year:
@@ -137,6 +164,13 @@ def build_parser():
     add_parser.add_argument("--description", required=True,metavar="[description]",help="Short description of the expense (e.g. Lunch, Taxi)")
     add_parser.add_argument("--amount", type=float, required=True,metavar="[price]",help="Amount spent in dollars (e.g. 12.5)")
 
+    # Update function
+    update_parser = subparsers.add_parser("update",help="Update an expense record")
+    update_parser.add_argument("--id", type=int,metavar="[id_number]", required=True, help="The expense ID you want to update")
+    update_parser.add_argument("--date",metavar="[yyyy/mm/dd]",help='Date of expense in "yyyy/mm/dd" form. (If not provided, will not be changed)')
+    update_parser.add_argument("--description",metavar="[description]",help="Short description of the expense (e.g. Lunch, Taxi)(If not provided, will not be changed)")
+    update_parser.add_argument("--amount", type=float, metavar="[price]",help="Amount spent in dollars (e.g. 12.5)(If not provided, will not be changed)")
+
     # list function
     subparsers.add_parser("list",help="List all expenses")
 
@@ -145,9 +179,9 @@ def build_parser():
     delete_parser.add_argument("--id", type=int,metavar="[id_number]", required=True, help="The expense ID you want to delete")
 
     # Summary function
-    summary_parser = subparsers.add_parser("summary")#todo: help
-    summary_parser.add_argument("--year", type=int)#todo: help, metavar
-    summary_parser.add_argument("--month", type=int)#todo: help, metavar (need to combine with year argument)
+    summary_parser = subparsers.add_parser("summary",help="Summary total expense for [total] or [year] or [year/month]")
+    summary_parser.add_argument("--year", type=int, metavar="[yyyy]",help='Year you want to summary expense.')
+    summary_parser.add_argument("--month", type=int, metavar="[mm]",help='Month you want to summary expense.(SHOULD use with --year)')
 
     return parser
 
@@ -167,11 +201,12 @@ def main():
         delete_expense(args.id)
     elif args.command == "summary":
         summary(args.year,args.month)
+    elif args.command == "update":
+        update_expense(args.id, args.description, args.amount, args.date)
     else:
         parser.print_help()
 
 if __name__ == "__main__":
     main()
 
-# todo: update function
-# todo: write a test program for user to demo usage
+# todo: check again, formatted and complete the project/README
