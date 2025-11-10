@@ -17,9 +17,13 @@ This repo is primarily for personal learning, but feel free to explore, fork, or
 ## Projects
 [roadmap.sh](https://roadmap.sh) provides curated developer roadmaps and project ideas to help learners grow with hands-on experience. This repo brings those ideas to life — one project at a time.
 You can refer to these projects below:
-1. [Task Tracker](https://roadmap.sh/projects/task-tracker)
-2. [GitHub User Activity](https://roadmap.sh/projects/github-user-activity)
-3. [Expense Tracker](https://roadmap.sh/projects/expense-tracker).
+- Python Projects:
+	1. [Task Tracker](https://roadmap.sh/projects/task-tracker)
+	2. [GitHub User Activity](https://roadmap.sh/projects/github-user-activity)
+	3. [Expense Tracker](https://roadmap.sh/projects/expense-tracker)
+
+- Bash Projects:
+	1. [Server Performance Stats](https://roadmap.sh/projects/server-stats)
 ---
 
 Feel free to clone and build your own versions. Happy coding!
